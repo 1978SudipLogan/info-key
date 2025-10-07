@@ -48,7 +48,7 @@ const Contacts = () => {
         {contacts.map((contact) => (
           <div
             key={contact.id}
-            className="bg-white rounded-lg shadow-lg p-4 hover:scale-105 transition-transform duration-300"
+            className="bg-blue-100 rounded-lg shadow-lg p-4 hover:scale-105 transition-transform duration-300"
           >
             <h2 className="text-xl font-semibold">{contact.name}</h2>
             <p className="text-gray-700">Email: {contact.email}</p>
