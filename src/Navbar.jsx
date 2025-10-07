@@ -82,11 +82,11 @@ const Navbar = () => {
             )}
           </div>
           {menu && (
-            <div className="absolute inset-0 w-[60%] h-full bg-gradient-to-b from-blue-500 to-pink-300 z-30 font-bold">
+            <div className="fixed inset-0  w-[60%] h-full bg-gradient-to-b from-blue-500 to-pink-300 z-30 font-bold">
               <img
                 src={logo}
                 alt=""
-                className="w-20 h-20 rounded-full  mx-auto"
+                className="w-20 h-20 rounded-full  mx-auto z-40"
               />
               <ul className="flex flex-col gap-5 justify-center items-center mt-10">
                 {links.map((item, index) => (
