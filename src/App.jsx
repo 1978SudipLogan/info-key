@@ -8,7 +8,7 @@ import Services from "./Services";
 import Contacts from "./Contacts";
 function App() {
   return (
-    <Router>
+    <Router basename="/info-key">
       <Routes>
         <Route path="/" element={<Layout />}>
           <Route index element={<Home />} />
