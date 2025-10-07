@@ -20,6 +20,9 @@ import {
 } from "@/components/ui/card";
 import { color } from "./redux/themeSlice";
 import { useDispatch, useSelector } from "react-redux";
+import { useState } from "react";
+import Bloomcare from "./assets/Bloomcare.png";
+import bookstore from "./assets/bookstore.png";
 
 const Home = () => {
   const invoices = [
@@ -67,36 +70,51 @@ const Home = () => {
     },
   ];
 
-  const col= useSelector((state) => state.theme.status);
+  const [mouse, setMouse] = useState(false);
+
+  const col = useSelector((state) => state.theme.status);
   return (
     <div
-      className={`grid grid-cols-1 pt-2 ${
-        col ? "bg-pink-400" : "bg-green-400"
+      className={`text-white grid grid-cols-1 pt-2 ${
+        col ? "bg-pink-950" : "bg-blue-950"
       }`}
     >
-      <div className="grid sm:grid-cols-[1.03fr_1fr] gap-5 grid-cols-1">
-        <Table className="sahdow-lg border border-2 border-gray-200 ">
+      <div className="grid sm:grid-cols-[1.03fr_1fr] gap-5 grid-cols-1 px-5">
+        <Table className="sahdow-lg  ">
           <TableHeader>
-            <TableRow>
-              <TableHead>Invoice</TableHead>
-              <TableHead>Status</TableHead>
-              <TableHead>Method</TableHead>
-              <TableHead>Amount</TableHead>
+            <TableRow className={`${col?"bg-pink-950 hover:bg-pink-600":"bg-blue-950 hover:bg-blue-600"}`}>
+              <TableHead className={`text-white/80`}>Invoice</TableHead>
+              <TableHead className={`text-white/80`}>Status</TableHead>
+              <TableHead className={`text-white/80`}>Method</TableHead>
+              <TableHead className={`text-white/80`}>Amount</TableHead>
             </TableRow>
           </TableHeader>
           <TableBody>
             {invoices.map((invoice) => (
-              <TableRow key={invoice.invoice}>
-                <TableCell className="font-medium">{invoice.invoice}</TableCell>
+              <TableRow
+                className={`${
+                  col
+                    ? "bg-pink-950 hover:bg-pink-600"
+                    : "bg-blue-950 hover:bg-blue-600"
+                }`}
+                key={invoice.invoice}
+              >
+                <TableCell>{invoice.invoice}</TableCell>
                 <TableCell>{invoice.paymentStatus}</TableCell>
                 <TableCell>{invoice.paymentMethod}</TableCell>
-                <TableCell className="">{invoice.totalAmount}</TableCell>
+                <TableCell>{invoice.totalAmount}</TableCell>
               </TableRow>
             ))}
           </TableBody>
           <TableFooter>
-            <TableRow>
-              <TableCell colSpan={2}>Total</TableCell>
+            <TableRow
+              className={`${
+                col
+                  ? "bg-pink-950 hover:bg-pink-600"
+                  : "bg-blue-950 hover:bg-blue-600"
+              }`}
+            >
+              <TableCell colSpan={3}>Total</TableCell>
               <TableCell className="">$2,500.00</TableCell>
             </TableRow>
           </TableFooter>
@@ -104,19 +122,56 @@ const Home = () => {
         <img
           src={logan}
           alt=""
-          className="w-4/5 h-[48vh]  rounded-sm bg-red-400  mx-auto md:ml-12"
+          className=" w-[90%] h-[48vh]  rounded-sm   mx-auto md:ml-12 transition-transform duration-500 hover:rotate-360"
         />
       </div>
-      <div className="grid grid-cols-1 sm:grid-cols-[1.03fr_1fr]  mt-5 gap-5">
-        <Card className="  h-56 flex  justify-center items-center ">
-          <CardContent>Animated Text</CardContent>
+      <div className="grid grid-cols-1 sm:grid-cols-[1.03fr_1fr]  mt-5 gap-5 px-5">
+        <Card
+          className={`hover:scale-105 hover:invert transition-all duration-500 h-56 flex  justify-center items-center text-white ${
+            col ? "bg-pink-950" : "bg-blue-950"
+          }`}
+          onMouseOver={() => {
+            setMouse(true);
+          }}
+        >
+          <CardContent>
+            {mouse ? (
+              <img src={Bloomcare} alt="" className="w-96 h-56" />
+            ) : (
+              <h1 className="text-xl">Hover on it to see the image</h1>
+            )}
+          </CardContent>
         </Card>
-        <Card className="  h-56 flex  justify-center items-center ">
-          <CardContent>Animated Text</CardContent>
+        <Card
+          className={`hover:scale-105 hover:invert transition-all duration-500 h-56 flex  justify-center items-center text-white ${
+            col ? "bg-pink-950" : "bg-blue-950"
+          }`}
+          onMouseOver={() => {
+            setMouse(true);
+          }}
+        >
+          <CardContent>
+            {" "}
+            <CardContent>
+              {mouse ? (
+                <img src={bookstore} alt="" className="w-96 h-56" />
+              ) : (
+                <h1 className="text-xl">Hover on it to see the image</h1>
+              )}
+            </CardContent>
+          </CardContent>
         </Card>
       </div>
-      <div className="flex gap-5 justify-around flex-wrap mt-5">
-        <Card className="w-full sm:w-80 ">
+      <div
+        className={`flex gap-5 px-5  justify-around flex-wrap mt-5  ${
+          col ? "bg-pink-950" : "bg-blue-950"
+        } `}
+      >
+        <Card
+          className={`hover:scale-105 hover:invert transition-all duration-500 hover:border-sky-400 drop-shadow-2xl  w-full sm:w-80  text-white  ${
+            col ? "bg-pink-950" : "bg-blue-950"
+          }`}
+        >
           <CardHeader>
             <CardTitle>Cognitive Therapy</CardTitle>
             <CardDescription>
@@ -132,7 +187,11 @@ const Home = () => {
           <CardFooter>Duration: 45 min per session</CardFooter>
         </Card>
 
-        <Card className="w-full sm:w-80 ">
+        <Card
+          className={`hover:scale-105 hover:invert transition-all duration-500 w-full hover:border-sky-400 sm:w-80  text-white  ${
+            col ? "bg-pink-950" : "bg-blue-950"
+          }`}
+        >
           <CardHeader>
             <CardTitle>Stress Management</CardTitle>
             <CardDescription>
@@ -148,7 +207,11 @@ const Home = () => {
           <CardFooter>Sessions: Weekly or Bi-weekly</CardFooter>
         </Card>
 
-        <Card className="w-full sm:w-80 ">
+        <Card
+          className={`w-full hover:invert hover:border-sky-400 hover:scale-105 transition-all duration-500 sm:w-80 bg-blue-950 text-white ${
+            col ? "bg-pink-950" : "bg-blue-950"
+          }`}
+        >
           <CardHeader>
             <CardTitle>Child & Adolescent Therapy</CardTitle>
             <CardDescription>
@@ -164,8 +227,12 @@ const Home = () => {
           <CardFooter>Age: 6–18 years</CardFooter>
         </Card>
       </div>
-      <div className="mt-5 grid grid-cols-1 gap-5 md:grid-cols-[2fr_1fr]  mb-4">
-        <Card className=" p-4 ">
+      <div className="mt-5 px-5 grid grid-cols-1 gap-10 md:grid-cols-[1.8fr_1fr]  mb-4">
+        <Card
+          className={`hover:invert hover:scale-105 transition-all duration-500 p-4 bg-blue-950 text-white ${
+            col ? "bg-pink-950" : "bg-blue-950"
+          }`}
+        >
           <CardHeader>
             <CardTitle>Personalized Therapy Session</CardTitle>
             <CardDescription>
@@ -193,7 +260,11 @@ const Home = () => {
           </CardFooter>
         </Card>
 
-        <Card className=" p-4">
+        <Card
+          className={`hover:invert hover:scale-105 transition-all duration-500 p-4 bg-blue-950 text-white ${
+            col ? "bg-pink-950" : "bg-blue-950"
+          }`}
+        >
           <CardHeader>
             <CardTitle>Upcoming Workshops</CardTitle>
             <CardDescription>Join our interactive sessions</CardDescription>

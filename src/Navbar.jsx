@@ -35,7 +35,11 @@ const Navbar = () => {
   return (
     <div>
       {screenWidth > 640 ? (
-        <div className="bg-blue-950 flex h-16 w-full justify-between items-center text-white fixed z-20 top-0">
+        <div
+          className={`bg-blue-950 flex h-16 w-full justify-between items-center text-white fixed z-20 top-0 ${
+            data ? "bg-pink-950" : "bg-blue-950"
+          }`}
+        >
           <div className="w-[12.85%] h-full flex justify-center items-center">
             <img src={logo} alt="Logo" className="w-20 h-20" />
           </div>
@@ -44,9 +48,10 @@ const Navbar = () => {
               <Link
                 key={index}
                 to={item.path}
-                className="hover:text-green-600 hover:font-semibold"
+                className="hover:text-sky-600 hover:font-semibold transition-all duration-500 relative"
               >
                 {item.text}
+                
               </Link>
             ))}
             {data ? (
@@ -55,7 +60,7 @@ const Navbar = () => {
                   dispatch(color(!data));
                 }}
               >
-                pink
+                Blue
               </Button>
             ) : (
               <Button
@@ -63,17 +68,21 @@ const Navbar = () => {
                   dispatch(color(!data));
                 }}
               >
-                green
+                Pink
               </Button>
             )}
           </div>
         </div>
       ) : (
         <>
-          <div className="flex justify-end bg-blue-950 h-16 items-center">
+          <div
+            className={`flex justify-end bg-blue-950 h-16 items-center  ${
+              data ? "bg-pink-950" : "bg-blue-950"
+            }`}
+          >
             {menu ? (
-              <Button className="relative  right-2" onClick={handleMenu}>
-                <X />
+              <Button className="relative  right-2 " onClick={handleMenu}>
+                <X className="" />
               </Button>
             ) : (
               <Button className="relative  right-2" onClick={handleMenu}>
@@ -81,40 +90,43 @@ const Navbar = () => {
               </Button>
             )}
           </div>
-          {menu && (
-            <div className="fixed inset-0  w-[60%] h-full bg-gradient-to-b from-blue-500 to-pink-300 z-30 font-bold">
-              <img
-                src={logo}
-                alt=""
-                className="w-20 h-20 rounded-full  mx-auto z-40"
-              />
-              <ul className="flex flex-col gap-5 justify-center items-center mt-10">
-                {links.map((item, index) => (
-                  <Link key={index} to={item.path} onClick={handleMenu}>
-                    {item.text}
-                  </Link>
-                ))}
-                {data ? (
-                  <Button
-                    className=""
-                    onClick={() => {
-                      dispatch(color(!data));
-                    }}
-                  >
-                    pink
-                  </Button>
-                ) : (
-                  <Button
-                    onClick={() => {
-                      dispatch(color(!data));
-                    }}
-                  >
-                    green
-                  </Button>
-                )}
-              </ul>
-            </div>
-          )}
+
+          <div
+            className={`fixed inset-0   w-[70%] h-full bg-gradient-to-b from-blue-500 to-pink-300 z-30 font-bold transition-all duration-700 ${
+              menu ? "left-0" : "-left-64"
+            }`}
+          >
+            <img
+              src={logo}
+              alt=""
+              className="w-20 h-20 rounded-full  mx-auto z-40"
+            />
+            <ul className="flex flex-col gap-5 justify-center items-center mt-10">
+              {links.map((item, index) => (
+                <Link key={index} to={item.path} onClick={handleMenu}>
+                  {item.text}
+                </Link>
+              ))}
+              {data ? (
+                <Button
+                  className=""
+                  onClick={() => {
+                    dispatch(color(!data));
+                  }}
+                >
+                  Blue
+                </Button>
+              ) : (
+                <Button
+                  onClick={() => {
+                    dispatch(color(!data));
+                  }}
+                >
+                  Pink
+                </Button>
+              )}
+            </ul>
+          </div>
         </>
       )}
     </div>
