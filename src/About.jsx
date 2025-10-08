@@ -33,7 +33,7 @@ const About = () => {
       <h1 className="text-3xl font-bold text-center mb-6">About Me</h1>
 
       {/* Description */}
-      <p className="text-center max-w-2xl mx-auto mb-6">
+      <p className="text-center max-w-2xl  mx-auto mb-6">
         {aboutData.description}
       </p>
 
@@ -59,7 +59,7 @@ const About = () => {
           {aboutData.experience.map((exp, index) => (
             <div
               key={index}
-              className="bg-white/10 p-4 rounded-lg shadow hover:scale-105 transition-transform duration-300"
+              className="bg-white/10 p-4 rounded-lg shadow hover:scale-105 hover:bg-white/20 transition-transform duration-300"
             >
               <h3 className="text-xl font-semibold">{exp.company}</h3>
               <p>{exp.role}</p>

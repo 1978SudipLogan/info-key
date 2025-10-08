@@ -48,7 +48,7 @@ const Navbar = () => {
               <Link
                 key={index}
                 to={item.path}
-                className="hover:text-sky-600 hover:font-semibold transition-all duration-500 relative"
+                className="hover:text-sky-600  "
               >
                 {item.text}
                 
@@ -93,7 +93,7 @@ const Navbar = () => {
 
           <div
             className={`fixed inset-0   w-[70%] h-full bg-gradient-to-b from-blue-500 to-pink-300 z-30 font-bold transition-all duration-700 ${
-              menu ? "left-0" : "-left-64"
+              menu ? "left-0" : "-left-[1000px]"
             }`}
           >
             <img

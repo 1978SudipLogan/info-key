@@ -75,7 +75,7 @@ const Home = () => {
     const amount=parseFloat(curr.totalAmount.replace("$",""))
     return acc+amount
   },0)
-  console.log(total)
+  
 
   const [mouse, setMouse] = useState(false);
 
@@ -122,14 +122,14 @@ const Home = () => {
               }`}
             >
               <TableCell colSpan={3}>Total</TableCell>
-              <TableCell className="">${total}</TableCell>
+              <TableCell className="">${total}.00</TableCell>
             </TableRow>
           </TableFooter>
         </Table>
         <img
           src={logan}
           alt=""
-          className=" w-[90%] h-[48vh]  rounded-sm   mx-auto md:ml-12 transition-transform duration-500 hover:rotate-360"
+          className=" w-[90%] h-[48vh]  rounded-sm   mx-auto md:ml-10 transition-transform duration-500 hover:rotate-360"
         />
       </div>
       <div className="grid grid-cols-1 sm:grid-cols-[1.03fr_1fr]  mt-5 gap-5 px-5">
@@ -184,7 +184,7 @@ const Home = () => {
             <CardDescription>
               Improve mental processes & problem-solving skills.
             </CardDescription>
-            <CardAction>Learn More</CardAction>
+            <CardAction className="cursor-pointer">Learn More</CardAction>
           </CardHeader>
           <CardContent>
             Our cognitive therapy sessions help clients reframe negative
@@ -193,6 +193,7 @@ const Home = () => {
           </CardContent>
           <CardFooter>Duration: 45 min per session</CardFooter>
         </Card>
+        
 
         <Card
           className={`hover:scale-105 hover:invert transition-all duration-500 w-full hover:border-sky-400 sm:w-80  text-white  ${
@@ -204,7 +205,7 @@ const Home = () => {
             <CardDescription>
               Techniques to handle stress effectively.
             </CardDescription>
-            <CardAction>Learn More</CardAction>
+            <CardAction className="cursor-pointer">Learn More</CardAction>
           </CardHeader>
           <CardContent>
             We provide personalized stress management plans including breathing
@@ -224,7 +225,7 @@ const Home = () => {
             <CardDescription>
               Support for children and teenagers facing emotional challenges.
             </CardDescription>
-            <CardAction>Learn More</CardAction>
+            <CardAction className="cursor-pointer">Learn More</CardAction>
           </CardHeader>
           <CardContent>
             Our therapists work closely with young clients to improve social
@@ -245,7 +246,7 @@ const Home = () => {
             <CardDescription>
               Comprehensive therapy plan tailored to your needs
             </CardDescription>
-            <CardAction>Book Now</CardAction>
+            <CardAction className="cursor-pointer">Book Now</CardAction>
           </CardHeader>
           <CardContent>
             Our personalized therapy sessions are designed to help you manage
