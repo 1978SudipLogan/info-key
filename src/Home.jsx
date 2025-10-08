@@ -70,6 +70,13 @@ const Home = () => {
     },
   ];
 
+
+  const total=invoices.reduce((acc,curr)=>{
+    const amount=parseFloat(curr.totalAmount.replace("$",""))
+    return acc+amount
+  },0)
+  console.log(total)
+
   const [mouse, setMouse] = useState(false);
 
   const col = useSelector((state) => state.theme.status);
@@ -115,7 +122,7 @@ const Home = () => {
               }`}
             >
               <TableCell colSpan={3}>Total</TableCell>
-              <TableCell className="">$2,500.00</TableCell>
+              <TableCell className="">${total}</TableCell>
             </TableRow>
           </TableFooter>
         </Table>
