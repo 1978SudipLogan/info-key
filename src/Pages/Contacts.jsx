@@ -1,58 +1,92 @@
-import React from "react";
-import '../index.css'
+import React, { useState } from "react";
+import "../index.css";
 import { useNavigate } from "react-router-dom";
-import { color } from "../redux/themeSlice";
-import { useSelector,useDispatch } from "react-redux";
+import { useSelector } from "react-redux";
 
 const Contacts = () => {
-  const contacts = [
-    { id: 1, name: "Sudip Kumar", email: "sudip@example.com", phone: "+91 9876543210" },
-    { id: 2, name: "Jayesh Patel", email: "jayesh@example.com", phone: "+91 9123456780" },
-    { id: 3, name: "Anjali Singh", email: "anjali@example.com", phone: "+91 9988776655" },
-    { id: 4, name: "Rohit Kumar", email: "rohit@example.com", phone: "+91 9871122334" },
-    { id: 5, name: "Priya Sharma", email: "priya@example.com", phone: "+91 9988112233" },
-  ];
+  const darkMode = useSelector((state) => state.theme.status);
+  const navigate = useNavigate();
 
-  // Function to get initials from name
-  const getInitials = (name) => {
-    const names = name.split(" ");
-    return names.map(n => n[0]).join("");
-  };
- const navigate = useNavigate();
+  const [formData, setFormData] = useState({
+    name: "",
+    email: "",
+    message: "",
+  });
 
-  const handleLogo = () => {
-    navigate("/"); // Replace "/" with the route you want
+  const handleChange = (e) => {
+    setFormData({ ...formData, [e.target.name]: e.target.value });
   };
 
-   const c=useSelector((state)=>state.theme.status)
-  const data=c
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    console.log("Form submitted:", formData);
+    alert("Thank you for contacting us!");
+    setFormData({ name: "", email: "", message: "" });
+  };
+
+  const handleLogo = () => navigate("/");
+
   return (
-    <div className={`min-h-screen  pt-20 ${data?"bg-pink-800 ":"bg-gradient-to-b from-black via-gray-900 to-black"}`}>
-       <strong className="sm:hidden absolute top-2 left-2 text-cyan-300" onClick={handleLogo}>
+    <div
+      className={`min-h-screen flex items-center justify-center pt-20 px-4 ${
+        darkMode
+          ? "bg-pink-800"
+          : "bg-gradient-to-b from-black via-gray-900 to-black"
+      }`}
+    >
+      <div className="w-full max-w-md bg-white bg-opacity-80 dark:bg-gray-900 dark:bg-opacity-90 rounded-2xl shadow-lg p-8">
+        {/* Logo */}
+        <strong
+          className="sm:hidden absolute top-4 left-4 text-cyan-300 cursor-pointer"
+          onClick={handleLogo}
+        >
           infoKey.in
         </strong>
-      <h1 className="text-4xl sm:text-5xl font-extrabold text-cyan-300 tracking-wide  text-center mb-10">
-        Contacts
-      </h1>
 
-      <div className="flex  flex-wrap gap-6 space-x-10  px-6 ">
-        {contacts.map((contact) => (
-          <div
-            key={contact.id}
-            className=" bg-white bg-opacity-50 w-56 mx-auto rounded-2xl shadow-lg p-6 flex flex-col items-center text-center transform hover:scale-105 transition-transform duration-300"
+        <h2 className="text-3xl font-bold mb-4 text-gray-800 dark:text-cyan-300 text-center">
+          Contact Us
+        </h2>
+
+        {/* Instruction Line */}
+        <p className="text-center mb-6 text-gray-700 dark:text-gray-300">
+          If you have any query related to the company or anything, you can ask here.
+        </p>
+
+        {/* Contact Form */}
+        <form onSubmit={handleSubmit} className="flex flex-col gap-4">
+          <input
+            type="text"
+            name="name"
+            placeholder="Your Name"
+            value={formData.name}
+            onChange={handleChange}
+            required
+            className="px-4 py-2 rounded-lg border border-gray-300 focus:outline-none focus:ring-2 focus:ring-cyan-400 dark:bg-gray-800 dark:text-white"
+          />
+          <input
+            type="email"
+            name="email"
+            placeholder="Your Email"
+            value={formData.email}
+            onChange={handleChange}
+            required
+            className="px-4 py-2 rounded-lg border border-gray-300 focus:outline-none focus:ring-2 focus:ring-cyan-400 dark:bg-gray-800 dark:text-white"
+          />
+          <textarea
+            name="message"
+            placeholder="Your Message"
+            value={formData.message}
+            onChange={handleChange}
+            required
+            className="px-4 py-2 rounded-lg border border-gray-300 focus:outline-none focus:ring-2 focus:ring-cyan-400 resize-none h-32 dark:bg-gray-800 dark:text-white"
+          />
+          <button
+            type="submit"
+            className="px-6 py-2 bg-cyan-500 text-white rounded-full hover:bg-cyan-600 transition-colors"
           >
-            <div className=" w-20 h-20 bg-gradient-to-r from-purple-400 to-pink-400 rounded-full flex items-center justify-center text-2xl font-bold text-white mb-4">
-              {getInitials(contact.name)}
-            </div>
-            <h2 className="text-xl font-semibold text-gray-800">{contact.name}</h2>
-            <p className="text-gray-600 mt-2 text-sm">📧 {contact.email}</p>
-            <p className="text-gray-600 mt-1 text-sm">📞 {contact.phone}</p>
-            <button className="mt-4 but px-4 py-2 bg-blue-500 text-white rounded-full hover:bg-blue-600 transition-colors">
-              Contact
-            </button>
-            
-          </div>
-        ))}
+            Send Message
+          </button>
+        </form>
       </div>
     </div>
   );
