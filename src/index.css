@@ -1,1 +1,46 @@
 @import "tailwindcss";
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap');
+
+/* Global font setup */
+body {
+  font-family: "Inter", sans-serif;
+}
+
+/* Custom button style */
+.but {
+  position: relative; /* needed for ::after positioning */
+  display: inline-block;
+  background-color: blue;
+  color: white;
+  font-family: "Inter", sans-serif;
+  font-weight: 500;
+  overflow: hidden;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+  z-index: 1;
+  font-size: 1rem;
+  
+}
+
+/* Hover effect background slide */
+.but::after {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 100%;
+  height: 100%;
+  background-color: rgb(2, 19, 108);
+  transition: left 0.4s ease;
+  z-index: -1;
+}
+
+/* Move black background into view on hover */
+.but:hover::after {
+  left: 0; 
+}
+
+.text{
+  text-shadow: 0.6px 0.6px rgb(3, 3, 158);
+  
+}

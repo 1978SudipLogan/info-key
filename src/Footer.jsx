@@ -1,14 +1,12 @@
 import React from "react";
 import { Phone, Mail, Facebook, Instagram, Linkedin } from "lucide-react";
 import { color } from "./redux/themeSlice";
-import { useSelector } from "react-redux";
+import { useSelector,useDispatch } from "react-redux";
 const Footer = () => {
   const col = useSelector((state) => state.theme.status);
   return (
-    <footer className={` text-white mt-2 ${
-        col ? "bg-pink-950" : "bg-blue-950"
-      }`}>
-      <div className="max-w-7xl mx-auto px-6 py-10 grid grid-cols-1 md:grid-cols-3 gap-8">
+    <footer className={` border-t-2 border-gray-500  text-white  ${col?"bg-pink-800 ":"bg-gradient-to-b from-black via-gray-900 to-black"}`}>
+      <div className="max-w-7xl mx-auto px-6 py-10 grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-8">
         {/* About Section */}
         <div>
           <h2 className="text-2xl font-bold mb-3">Therapy Center</h2>

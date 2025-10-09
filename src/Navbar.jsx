@@ -1,24 +1,24 @@
 import React, { useState, useEffect } from "react";
-import { Link, Links } from "react-router-dom";
+import { Link, useNavigate, NavLink } from "react-router-dom";
 import logo from "./assets/therapy_center_logo.png";
 import { Button } from "@/components/ui/button";
-import { Menu } from "lucide-react";
-import { X } from "lucide-react";
+
 import { useDispatch, useSelector } from "react-redux";
 import { color } from "./redux/themeSlice";
-
+import { Home, Wrench, Info, Phone } from "lucide-react";
+import { FaSun, FaMoon } from "react-icons/fa";
 const Navbar = () => {
   const c = useSelector((state) => state.theme.status);
   const data = c;
-  const [screenWidth, setScreenWidth] = useState(window.innerWidth);
-  const [menu, setMenu] = useState(false);
-  const links = [
-    { text: "Home", path: "/" },
-    { text: "About", path: "about" },
-    { text: "Services", path: "services" },
-    { text: "Contacts", path: "contacts" },
-  ];
 
+  const [screenWidth, setScreenWidth] = useState(window.innerWidth);
+  const links = [
+    { text: "Home", path: "/", icon: <Home /> },
+    { text: "About", path: "about", icon: <Info /> },
+    { text: "Services", path: "services", icon: <Wrench /> },
+    { text: "Contacts", path: "contacts", icon: <Phone /> },
+  ];
+  <Wrench />;
   useEffect(() => {
     const handleResize = () => setScreenWidth(window.innerWidth);
     window.addEventListener("resize", handleResize);
@@ -26,108 +26,78 @@ const Navbar = () => {
     return () => window.removeEventListener("resize", handleResize);
   }, [window.innerWidth]);
 
-  const handleMenu = () => {
-    setMenu(!menu);
-  };
-
   const dispatch = useDispatch();
 
-  return (
-    <div>
-      {screenWidth > 640 ? (
-        <div
-          className={`bg-blue-950 flex h-16 w-full justify-between items-center text-white fixed z-20 top-0 ${
-            data ? "bg-pink-950" : "bg-blue-950"
-          }`}
-        >
-          <div className="w-[12.85%] h-full flex justify-center items-center">
-            <img src={logo} alt="Logo" className="w-20 h-20" />
-          </div>
-          <div className="w-[90%]  flex justify-end gap-5 pr-5 h-full items-center">
-            {links.map((item, index) => (
-              <Link
-                key={index}
-                to={item.path}
-                className="hover:text-sky-600  "
-              >
-                {item.text}
-                
-              </Link>
-            ))}
-            {data ? (
-              <Button
-                onClick={() => {
-                  dispatch(color(!data));
-                }}
-              >
-                Blue
-              </Button>
-            ) : (
-              <Button
-                onClick={() => {
-                  dispatch(color(!data));
-                }}
-              >
-                Pink
-              </Button>
-            )}
-          </div>
-        </div>
-      ) : (
-        <>
-          <div
-            className={`flex justify-end bg-blue-950 h-16 items-center  ${
-              data ? "bg-pink-950" : "bg-blue-950"
-            }`}
-          >
-            {menu ? (
-              <Button className="relative  right-2 " onClick={handleMenu}>
-                <X className="" />
-              </Button>
-            ) : (
-              <Button className="relative  right-2" onClick={handleMenu}>
-                <Menu />
-              </Button>
-            )}
-          </div>
+  const navigate = useNavigate();
 
-          <div
-            className={`fixed inset-0   w-[70%] h-full bg-gradient-to-b from-blue-500 to-pink-300 z-30 font-bold transition-all duration-700 ${
-              menu ? "left-0" : "-left-[1000px]"
-            }`}
-          >
-            <img
-              src={logo}
-              alt=""
-              className="w-20 h-20 rounded-full  mx-auto z-40"
+  const handleLogo = () => {
+    navigate("/"); // Replace "/" with the route you want
+  };
+
+  return screenWidth > 640 ? (
+    <div className="fixed w-full h-20 z-20 ">
+      <div className="flex justify-between items-center px-10">
+        <img
+          src={logo}
+          alt=""
+          className="w-20 h-20  rounded-full "
+          onClick={handleLogo}
+        />
+        <div className=" flex justify-center items-center gap-8">
+          {links.map((link, index) => (
+            <NavLink
+              key={index}
+              to={link.path}
+              end
+              className={({ isActive }) =>
+                isActive
+                  ? "text-green-500  transition-all duration-300"
+                  : "text-cyan-300 hover:text-cyan-300"
+              }
+            >
+              {link.text}
+            </NavLink>
+          ))}
+          {data ? (
+            <FaMoon
+              className="text-xl text-cyan-300"
+              onClick={() => dispatch(color(!data))}
             />
-            <ul className="flex flex-col gap-5 justify-center items-center mt-10">
-              {links.map((item, index) => (
-                <Link key={index} to={item.path} onClick={handleMenu}>
-                  {item.text}
-                </Link>
-              ))}
-              {data ? (
-                <Button
-                  className=""
-                  onClick={() => {
-                    dispatch(color(!data));
-                  }}
-                >
-                  Blue
-                </Button>
-              ) : (
-                <Button
-                  onClick={() => {
-                    dispatch(color(!data));
-                  }}
-                >
-                  Pink
-                </Button>
-              )}
-            </ul>
-          </div>
-        </>
+          ) : (
+            <FaSun
+              className="text-xl text-cyan-300"
+              onClick={() => dispatch(color(!data))}
+            />
+          )}
+        </div>
+      </div>
+    </div>
+  ) : (
+    <div className="fixed bottom-1 w-[98vw] mx-1 h-16 flex justify-around items-center rounded-full   items-center bg-cyan-600 bg-blur z-30 text-white">
+      {links.map((link, index) => (
+        <NavLink
+          key={index}
+          to={link.path}
+          end
+          className={({ isActive }) =>
+            isActive
+              ? "text-black font-bold "
+              : "text-cyan-300 hover:text-cyan-300"
+          }
+        >
+          {link.icon}
+        </NavLink>
+      ))}
+      {data ? (
+        <FaMoon
+          className="text-xl text-cyan-300"
+          onClick={() => dispatch(color(!data))}
+        />
+      ) : (
+        <FaSun
+          className="text-xl text-cyan-300"
+          onClick={() => dispatch(color(!data))}
+        />
       )}
     </div>
   );
