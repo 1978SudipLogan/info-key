@@ -1,15 +1,17 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import hero5 from "../assets/hero5.svg";
 import logo from "../assets/therapy_center_logo.png";
 import { Button } from "@/components/ui/button";
 import { Facebook, Twitter, Instagram, Linkedin } from "lucide-react";
 import "../index.css";
 import { useNavigate } from "react-router-dom";
+
 const Home = () => {
-  const navigate=useNavigate()
-  const handleContact=()=>{
-    navigate("/contacts")
-  }
+  
+  const navigate = useNavigate();
+  const handleContact = () => {
+    navigate("/contacts");
+  };
   return (
     <div className="relative h-screen w-full ">
       {/* Background Image */}
@@ -23,7 +25,9 @@ const Home = () => {
 
       {/* Centered Content */}
       <div className="absolute inset-0 flex flex-col items-center justify-center text-center px-4 space-y-6 ">
-        <strong className=" sm:hidden absolute top-2 left-2 text-cyan-300">infoKey.in</strong> 
+        <strong className=" sm:hidden absolute top-2 left-2 text-cyan-300">
+          infoKey.in
+        </strong>
         <h1 className="text-3xl sm:text-4xl text md:text-5xl lg:text-6xl font-bold text-blue-100 drop-shadow-lg">
           “Transforming Ideas Into Reality.”
         </h1>
@@ -47,7 +51,9 @@ const Home = () => {
           </div>
         </div>
         {/* Call to Action */}
-        <Button className="but  rounded-full" onClick={handleContact}>Contact Us</Button>
+        <Button className="but  rounded-full" onClick={handleContact}>
+          Contact Us
+        </Button>
         {/* Social Media Links */}
         <div className="flex space-x-6 mt-0 md:mt-6">
           <a
@@ -80,6 +86,7 @@ const Home = () => {
           </a>
         </div>
       </div>
+      
     </div>
   );
 };

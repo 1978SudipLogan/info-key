@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 import { Link, useNavigate, NavLink } from "react-router-dom";
 import logo from "./assets/therapy_center_logo.png";
 import { Button } from "@/components/ui/button";
-
+import { Chromium, Eye } from 'lucide-react';
 import { useDispatch, useSelector } from "react-redux";
 import { color } from "./redux/themeSlice";
 import { Home, Wrench, Info, Phone } from "lucide-react";
@@ -16,6 +16,8 @@ const Navbar = () => {
     { text: "Home", path: "/", icon: <Home /> },
     { text: "About", path: "about", icon: <Info /> },
     { text: "Services", path: "services", icon: <Wrench /> },
+    { text: "Design", path: "design", icon: <Chromium /> },
+    { text: "FormDesign", path: "form-design", icon: <Eye /> },
     { text: "Contacts", path: "contacts", icon: <Phone /> },
   ];
   <Wrench />;
